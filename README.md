@@ -1,2 +1,2 @@
-# uscis-speed-test-repo
-USCIS speed test repo
+# uscis-speed-test
+USCIS speed test
