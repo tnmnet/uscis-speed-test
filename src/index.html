@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      background-image: url('gdit-background.jpg');
+      background-repeat: no-repeat;
+      background-attachment: fixed; 
+      background-size: 100% 100%;
+    }
+    #logo {
+      background-image: url('gdit-logo.png');
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+      width: 303px;
+      height: 150px;
+    }
+    #main {
+      width: 80%;
+      height: 80%;
+      margin: 50px;
+    }
+  </style>
+  <title>GDIT Hello World</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+
+  <div id="logo"></div>
+
+  <div id="main">
+
+    <div id="button">
+      <p>{{ message }}</p>
+      <button v-on:click="reverseMessage">Reverse Message</button>
+    </div>
+
+    <div id="input">
+      <p>{{ message }}</p>
+      <input v-model="message">
+    </div>
+
+    <div id="apihellowworld">
+      <p>{{ message }}</p>
+      <button v-on:click="callHelloWorldAPI">Call Hello World API</button>
+      <button v-on:click="clearHelloWorldText">Clear text</button>
+    </div>
+
+    <div id="apidatabase">
+      <p>{{ message }}</p>
+      <button v-on:click="callDatabaseAPI">Call Database API</button>
+      <button v-on:click="clearDatabaseText">Clear text</button>
+    </div>
+
+  </div>
+
+  <!-- Scripts included here for simplicity -->
+  <script>
+
+    var button = new Vue({
+      el: '#button',
+      data: {
+        message: 'The Art of the Possible'
+      },
+      methods: {
+        reverseMessage: function () {
+          this.message = this.message.split('').reverse().join('')
+        }
+      }
+    })
+
+    var input = new Vue({
+      el: '#input',
+      data: {
+        message: 'We are GDIT!'
+      }
+    })
+
+    var button = new Vue({
+      el: '#apihellowworld',
+      data: {
+        message: '...no call yet...'
+      },
+      methods: {
+        callHelloWorldAPI: function () {
+          axios
+            .get('https://gditappservices-n-tier-api.ingress-aws-eks-j.dops-lab.com/api/helloworld')
+            .then(response => (this.message = response.data))
+            .catch(error => console.log(error))
+        },
+        clearHelloWorldText: function () {
+          this.message = "...cleared..."
+        }
+      }
+    })
+
+    var button = new Vue({
+      el: '#apidatabase',
+      data: {
+        message: '...no call yet...'
+      },
+      methods: {
+        callDatabaseAPI: function () {
+          axios
+            .get('https://gditappservices-n-tier-api.ingress-aws-eks-j.dops-lab.com/api/database')
+            .then(response => (this.message = response.data))
+            .catch(error => console.log(error))
+        },
+        clearDatabaseText: function () {
+          this.message = "...cleared..."
+        }
+      }
+    })
+
+  </script>
+
+
+</body>
+</html>
