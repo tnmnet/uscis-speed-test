@@ -15,7 +15,7 @@ on:
 
 env:
   # TODO: Change variable to your image's name.
-  IMAGE_NAME: oion-fitz-123
+  IMAGE_NAME: Janek-2-3-2021
 
 jobs:
   # Run tests.
